@@ -1,28 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { Test } from './Test/Test' //! 1.1 pridetas test.js;
+import { Button } from './Button/Button'; 
+import { Header } from './Header/Header'; 
 
 function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Codeacademy.lt React paskaita!
-        </p>
-        <form>
-          <input type='text'></input>
-          <button type='send'></button>
-        </form>
-        <a
-          className="App-link"
-          href="https://codeacademy.online"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Test />
+      {/* //! 1.1 */}
+      <Button text="click me!" />
+      <Button text="paspausk mane"/>
+      <Button>Click ME!</Button>
     </div>
   );
 }
