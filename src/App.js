@@ -1,17 +1,17 @@
 import './App.css';
-import { Counter } from './Counter/Counter'
-import { useState } from 'react'
+import { Header } from "../src/Header/Header"
+import { Footer } from "../src/Footer/Footer"
+import Employees from "../src/Employees/Employees"
 
 function App() {
-  const [isCounterVisible, setIsCounterVisible] = useState();
-  const handleToggleCounter = () => {
-    setIsCounterVisible(!isCounterVisible);
-  }
 
   return (
     <div className='App'>
-      <button onClick={handleToggleCounter}>Toggle Counter</button>
-      {isCounterVisible && <Counter />}
+      <Header/>
+      <Employees/>
+      <Footer/>
+      <button type="button" className="btn btn-primary">Primary</button>
+      <button type="button" className="btn btn-secondary">Secondary</button>
     </div>
   );
 }
