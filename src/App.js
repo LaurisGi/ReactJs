@@ -1,123 +1,51 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import { Header } from "../src/Header/Header"
-import { Footer } from "../src/Footer/Footer"
-import Employees from "../src/Employees/Employees"
-import { useState } from 'react';
+
 
 function App() {
+  const [count, setCount] = useState(0);
 
-  const [selectedTeam, setTeam] = useState("TeamB");
-    
-  const [employees, setEmployees] = useState([{
-      id: 1,
-      fullName: "Bob Jones",
-      designation: "JavaScript Developer",
-      gender: "male",
-      teamName: "TeamA"
-    },
-    {
-      id: 2,
-      fullName: "Jill Bailey",
-      designation: "Node Developer",
-      gender: "female",
-      teamName: "TeamA"
-    },
-    {
-      id: 3,
-      fullName: "Gail Shepherd",
-      designation: "Java Developer",
-      gender: "female",
-      teamName: "TeamA"
-    },
-    {
-      id: 4,
-      fullName: "Sam Reynolds",
-      designation: "React Developer",
-      gender: "male",
-      teamName: "TeamB"
-    },
-    {
-      id: 5,
-      fullName: "David Henry",
-      designation: "DotNet Developer",
-      gender: "male",
-      teamName: "TeamB"
-    },
-    {
-      id: 6,
-      fullName: "Sarah Blake",
-      designation: "SQL Server DBA",
-      gender: "female",
-      teamName: "TeamB"
-    },
-    {
-      id: 7,
-      fullName: "James Bennet",
-      designation: "Angular Developer",
-      gender: "male",
-      teamName: "TeamC"
-    },
-    {
-      id: 8,
-      fullName: "Jessica Faye",
-      designation: "API Developer",
-      gender: "female",
-      teamName: "TeamC"
-    },
-    {
-      id: 9,
-      fullName: "Lita Stone",
-      designation: "C++ Developer",
-      gender: "female",
-      teamName: "TeamC"
-    },
-    {
-      id: 10,
-      fullName: "Daniel Young",
-      designation: "Python Developer",
-      gender: "male",
-      teamName: "TeamD"
-    },
-    {
-      id: 11,
-      fullName: "Adrian Jacobs",
-      designation: "Vue Developer",
-      gender: "male",
-      teamName: "TeamD"
-    },
-    {
-      id: 12,
-      fullName: "Devin Monroe",
-      designation: "Graphic Designer",
-      gender: "male",
-      teamName: "TeamD"
-    }])
+  useEffect(() => {
+    console.log('COMPONENT MOUNTED');
+  }, [count]);
 
-    function handleTeamSelectionChange(event)
-    {
-      setTeam(event.target.value);
-    }
+  const handleIncrement = (event) => {
+    console.log(event);
+  }
 
-    function handeEmployeeCardClick(event){
-      const transformedEmployees = employees.map((employee) => employee.id === parseInt(event.currentTarget.id)
-        ? (employee.teamName === selectedTeam) ? {...employee, teamName:''} : {...employee, teamName: selectedTeam }
-        : employee);
-      setEmployees(transformedEmployees);
-      
-    }
+  const handleIncrementKeyDown = (event) => {
+    console.log(event);
+  }
+
+  const handleIncrementKeyUp = (event) => {
+    console.log(event);
+  }
+  const handleInputChange = (event) => {
+    console.log(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('SUBMIT');
+  }
+
+  const handleInputBlur = (event) => {
+    console.log('INPUT LOST FOCUS')
+  }
 
   return (
-    <div className='App'>
-      <Header/>
-      <Employees employees={employees}
-                selectedTeam={selectedTeam}
-                handeEmployeeCardClick={handeEmployeeCardClick}
-                handleTeamSelectionChange={handleTeamSelectionChange}
-                 />
-      <Footer/>
-      <button type="button" className="btn btn-primary">Primary</button>
-      <button type="button" className="btn btn-secondary">Secondary</button>
-    </div>
+    <form action="" onSubmit={handleSubmit}>
+      <div className='App'>
+        {count}
+        <button
+          onKeyUp={handleIncrementKeyUp}
+          onKeyDown={handleIncrementKeyDown}
+          onClick={handleIncrement}
+          >
+          Increment</button>
+          <input onChange={handleInputChange} onBlur={handleInputBlur}/>
+      </div>
+    </form>
   );
 }
 
