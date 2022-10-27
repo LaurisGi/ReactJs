@@ -1,5 +1,15 @@
+import { redirect } from "react-router-dom";
+import styled from 'styled-components';
+
+const Title = styled.h1`
+    color: blue;
+    font-size: 5rem;
+    justify-content: center;
+    font-weight: 800;
+`;
+
 export const HomePage = () => {
    return (
-    <div className="h2 display-3 text-center">Home page</div>
+    <Title className="h2 display-3 text-center">Home page</Title>
     )
 }

@@ -1,5 +1,6 @@
+import styles from './about-page.module.scss'
 export const AboutPage = () => {
     return (
-    <div className="h2 display-3 text-center">About page</div>
+    <div className={styles.title}>About page</div>
     )
 }
