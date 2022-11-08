@@ -1,27 +1,40 @@
-import { Form } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+const LoginPage = ({ onLogin }) => {
+    const [username, setUsername] = useState('');
+    const navigate = useNavigate();
 
-export const LoginPage = ({ onLogin }) => {
-    const navigateTo = useNavigate();
-    
-    const handleLogin = () => {
-        onLogin();
-        navigateTo('/');
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onLogin(username);
+
+        // fetch('/login', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+
+        //     })
+        // })
+        // .then((res) => res.json())
+        // .then((data) => {
+        //     onLogin(data);
+        // })
+        // .catch(())
+
+        navigate('/');
+    };
+    const handleUsernameChange = (e) => setUsername(e.target.value);
+
     return (
-        <form>
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Username</label>
-                    <div className="col-sm-10">
-                        <input type="text" name="name" label></input>
-                    </div>
-                <label className="col-sm-2 col-form-label">Password</label>
-                    <div className="col-sm-10">
-                        <input type="password" name="password"></input>
-                    </div>
-            </div>
-            <button onClick={handleLogin}>Login</button>
-        </form>
+        <div>
+            <h1>Login page</h1>
+            <form onSubmit={handleSubmit}>
+                <input placeholder="Username" onChange={handleUsernameChange} />
+                <input type="password" placeholder="Password" />
+                <button>Login</button>
+            </form>
+        </div>
     )
-}
+};
+
+export default LoginPage;

@@ -1,31 +1,50 @@
+import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import './App.css';
-import { AboutPage } from './AboutPage/AboutPage'
-import { HomePage } from './HomePage/HomePage'
-import { ContactsPage } from './ContactsPage/ContactsPage'
+import { Suspense } from 'react';
 import { Navigation } from './Navigation/Navigation'
-import { PageLayout } from './PageLayout'
-import { LoginPage } from './LoginPage/LoginPage'
-import { useState } from 'react';
+import { PageLayout } from './PageLayout';
+import { RouteSuspense } from './RouteSuspense/RouteSuspense';
 
+import './App.css';
+
+
+const HomePage = React.lazy(() => import('./HomePage/HomePage'));
+const ContactsPage = React.lazy(() => import('./ContactsPage/ContactsPage'));
+const AboutPage = React.lazy(() => import('./AboutPage/AboutPage'));
+const LoginPage = React.lazy(() => import('./LoginPage/LoginPage'));
 
 function App() {
   const [user, setUser] = useState(null);
 
-  const handleLogin = () => setUser({ username: 'Petras123'})
-  const handleLogout = () => setUser(null);
+  const handleLogin = (username) => setUser({ username });
 
   return (
-      <div className='App'>
-        <Navigation onLogout={handleLogout} />
-        <Routes>
-          <Route path="/" element={<PageLayout user={user} onLogout={handleLogout}/>}>
-            <Route index element={<HomePage/>} />
-            <Route path="/contacts" element={<ContactsPage/>} />
-          </Route>
-          <Route path="/Login" element={<LoginPage onLogin={handleLogin} />}/>
-        </Routes>
-      </div>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<PageLayout user={user} />}>
+          <Route index element={
+            <RouteSuspense>
+              <HomePage />
+            </RouteSuspense>
+          } />
+          <Route path="/contacts" element={
+            <RouteSuspense>
+              <ContactsPage />
+            </RouteSuspense>
+          } />
+          <Route path="/about" element={
+            <RouteSuspense>
+              <AboutPage />
+            </RouteSuspense>
+          } />
+        </Route>
+        <Route path="/login" element={
+          <RouteSuspense>
+            <LoginPage onLogin={handleLogin} />
+          </RouteSuspense>
+        } />
+      </Routes>
+    </div>
   );
 }
 

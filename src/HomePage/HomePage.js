@@ -8,8 +8,11 @@ const Title = styled.h1`
     font-weight: 800;
 `;
 
-export const HomePage = () => {
+const HomePage = () => {
    return (
     <Title className="h2 display-3 text-center">Home page</Title>
     )
 }
+
+
+export default HomePage;
